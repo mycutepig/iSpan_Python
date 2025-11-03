@@ -8,21 +8,29 @@ import random
 password = random.randint(1, 100)
 maximum = 100
 minimum = 1
+guess = float("inf")
 
-guess = int(input(f"Enter a integer from {str(minimum)} ~ {str(maximum)}: "))
 while guess != password:
+    try:
+        guess = int(input(f"Enter a integer from {str(minimum)} ~ {str(maximum)}: "))
+    except ValueError:
+        print("請輸入 數字(integer)")
+        continue
+    except KeyboardInterrupt:
+        print("結束遊戲")
+        break
+
     if guess > maximum or guess < minimum:
         print("超出範圍請重新輸入")
     elif guess > password:
         maximum = guess
         print("請輸入更小的數字")
-    else:
+    elif guess < password:
         minimum = guess
         print("請輸入更大的數字")
-    guess = int(input(f"Enter a integer from {str(minimum)} ~ {str(maximum)}: "))
-        
 
-print("恭喜中獎")
+if guess == password:
+    print("恭喜中獎")
 
 
 
